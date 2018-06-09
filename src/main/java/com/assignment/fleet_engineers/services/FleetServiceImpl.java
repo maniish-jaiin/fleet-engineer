@@ -1,6 +1,6 @@
 package com.assignment.fleet_engineers.services;
 
-import com.assignment.fleet_engineers.model.Scooter;
+import com.assignment.fleet_engineers.model.ScooterSpec;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,42 +8,47 @@ import java.util.List;
 
 @Component
 public class FleetServiceImpl implements FleetService {
+
+    private int maintainedByEngineers;
+
     public FleetServiceImpl() {
     }
 
-
-    private int getTotalNumberOfFE(int maintainedByEngineers, List<Integer> numberInDistrict) {
-        int numberOfFE;
-        int totalNumberOfFE = 0;
-        for (Integer scootersInDistrict : numberInDistrict) {
-            if (scootersInDistrict % maintainedByEngineers == 0) {
-                numberOfFE = scootersInDistrict / maintainedByEngineers;
-            } else {
-                numberOfFE = (scootersInDistrict / maintainedByEngineers) + 1;
+    @Override
+    public int getNumberOfFleetEngineers(ScooterSpec scooterSpec) {
+        int max = Integer.MIN_VALUE;
+        int districtIndexForFM = 0;
+        maintainedByEngineers = scooterSpec.getMaintainedByEngineers();
+        int maintainedByManagers = scooterSpec.getMaintainedByManagers();
+        List<Integer> scootersInDistrict = new ArrayList<>(scooterSpec.getScootersInDistrict());
+        int number = 0;
+        for (int i = 0; i < scootersInDistrict.size(); i++) {
+            int diff;
+            Integer scooters = scootersInDistrict.get(i);
+            number += numberOfFEPerDistrict(scooters);
+            diff = numberOfFEPerDistrict(scooters)
+                    - numberOfFEPerDistrict((scooters - maintainedByManagers));
+            if (max < diff) {
+                max = diff;
+                districtIndexForFM = i;
             }
-            totalNumberOfFE += numberOfFE;
         }
-        return totalNumberOfFE;
+
+        Integer scooters = scooterSpec.getScootersInDistrict().get(districtIndexForFM);
+        return number - numberOfFEPerDistrict(scooters) +
+                numberOfFEPerDistrict(scooters - maintainedByManagers);
+
     }
 
-    public int getNumberOfFleetEngineers(Scooter scooter) {
-        int totalNumberOfFE;
-        int min = 9999;
-        int maintainedByEngineers = scooter.getMaintainedByEngineers();
-        int maintainedByManager = scooter.getMaintainedByManagers();
-
-        for (int i = 0; i < scooter.getScootersInDistrict().size(); i++) {
-            List<Integer> numberInDistrict = new ArrayList<>(scooter.getScootersInDistrict());
-            int element = numberInDistrict.get(i) - maintainedByManager;
-            if (element < 0)
-                numberInDistrict.set(i, 0);
-            else
-                numberInDistrict.set(i, element);
-            totalNumberOfFE = getTotalNumberOfFE(maintainedByEngineers, numberInDistrict);
-            if (min > totalNumberOfFE) {
-                min = totalNumberOfFE;
+    private int numberOfFEPerDistrict(int scooters) {
+        if (scooters > 0) {
+            if (scooters % maintainedByEngineers == 0) {
+                return scooters / maintainedByEngineers;
+            } else {
+                return (scooters / maintainedByEngineers) + 1;
             }
+        } else {
+            return 0;
         }
-        return min;
     }
 }

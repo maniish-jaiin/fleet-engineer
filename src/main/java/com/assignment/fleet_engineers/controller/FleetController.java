@@ -1,6 +1,6 @@
 package com.assignment.fleet_engineers.controller;
 
-import com.assignment.fleet_engineers.model.Scooter;
+import com.assignment.fleet_engineers.model.ScooterSpec;
 import com.assignment.fleet_engineers.services.FleetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,19 +9,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.logging.Logger;
+
 @RestController
 public class FleetController {
 
+    Logger logger = Logger.getLogger("FleetController");
     @Autowired
     FleetServiceImpl fleetServiceImpl;
+    private ScooterSpec scooterSpec;
 
     @GetMapping(value = "/fleetEngineers", produces = MediaType.APPLICATION_JSON_VALUE)
     public int getNoOfFleetEngineer() {
-        return 0;
+        return fleetServiceImpl.getNumberOfFleetEngineers(scooterSpec);
     }
 
     @PostMapping(value = "/fleetEngineers")
-    public int storeScooterData(@RequestBody Scooter scooter) {
-        return fleetServiceImpl.getNumberOfFleetEngineers(scooter);
+    public String storeScooterData(@RequestBody ScooterSpec scooterSpec) {
+        this.scooterSpec = scooterSpec;
+        logger.info("Request received: " + scooterSpec.toString());
+        return "Data Stored";
     }
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scooter {
+public class ScooterSpec {
 
     @JsonProperty("P")
     private int maintainedByEngineers;
@@ -38,5 +38,14 @@ public class Scooter {
 
     public void setScootersInDistrict(List<Integer> scootersInDistrict) {
         this.scootersInDistrict = scootersInDistrict;
+    }
+
+    @Override
+    public String toString() {
+        return "ScooterSpec{" +
+                "maintainedByEngineers=" + maintainedByEngineers +
+                ", maintainedByManagers=" + maintainedByManagers +
+                ", scootersInDistrict=" + scootersInDistrict +
+                '}';
     }
 }
