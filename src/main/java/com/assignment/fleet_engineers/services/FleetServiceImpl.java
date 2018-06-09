@@ -18,14 +18,15 @@ public class FleetServiceImpl implements FleetService {
     public int getNumberOfFleetEngineers(ScooterSpec scooterSpec) {
         int max = Integer.MIN_VALUE;
         int districtIndexForFM = 0;
-        maintainedByEngineers = scooterSpec.getMaintainedByEngineers();
+        int totalFE = 0;
+        int diff;
         int maintainedByManagers = scooterSpec.getMaintainedByManagers();
+        maintainedByEngineers = scooterSpec.getMaintainedByEngineers();
         List<Integer> scootersInDistrict = new ArrayList<>(scooterSpec.getScootersInDistrict());
-        int number = 0;
+
         for (int i = 0; i < scootersInDistrict.size(); i++) {
-            int diff;
             Integer scooters = scootersInDistrict.get(i);
-            number += numberOfFEPerDistrict(scooters);
+            totalFE += numberOfFEPerDistrict(scooters);
             diff = numberOfFEPerDistrict(scooters)
                     - numberOfFEPerDistrict((scooters - maintainedByManagers));
             if (max < diff) {
@@ -34,9 +35,9 @@ public class FleetServiceImpl implements FleetService {
             }
         }
 
-        Integer scooters = scooterSpec.getScootersInDistrict().get(districtIndexForFM);
-        return number - numberOfFEPerDistrict(scooters) +
-                numberOfFEPerDistrict(scooters - maintainedByManagers);
+        return totalFE - numberOfFEPerDistrict(scootersInDistrict.get(districtIndexForFM))
+                + numberOfFEPerDistrict(scootersInDistrict.get(districtIndexForFM)
+                - maintainedByManagers);
 
     }
 
