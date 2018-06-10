@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "b948852d-4ca5-43e0-aa07-2e86c77700de",
+		"name": "Fleet Engineer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Min Fleet Engineer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"scooters\": [11, 15, 13], \"C\": 9,\n\"P\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/fleetEngineers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fleetEngineers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

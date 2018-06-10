@@ -10,6 +10,7 @@ import java.util.List;
 public class FleetServiceImpl implements FleetService {
 
     private int maintainedByEngineers;
+    private int maintainedByManagers;
 
     public FleetServiceImpl() {
     }
@@ -17,10 +18,10 @@ public class FleetServiceImpl implements FleetService {
     @Override
     public int getNumberOfFleetEngineers(ScooterSpec scooterSpec) {
         int max = Integer.MIN_VALUE;
-        int districtIndexForFM = 0;
+        int targetDistrictForFM = 0;
         int totalFE = 0;
         int diff;
-        int maintainedByManagers = scooterSpec.getMaintainedByManagers();
+        maintainedByManagers = scooterSpec.getMaintainedByManagers();
         maintainedByEngineers = scooterSpec.getMaintainedByEngineers();
         List<Integer> scootersInDistrict = new ArrayList<>(scooterSpec.getScootersInDistrict());
 
@@ -31,14 +32,13 @@ public class FleetServiceImpl implements FleetService {
                     - numberOfFEPerDistrict((scooters - maintainedByManagers));
             if (max < diff) {
                 max = diff;
-                districtIndexForFM = i;
+                targetDistrictForFM = i;
             }
         }
 
-        return totalFE - numberOfFEPerDistrict(scootersInDistrict.get(districtIndexForFM))
-                + numberOfFEPerDistrict(scootersInDistrict.get(districtIndexForFM)
+        return totalFE - numberOfFEPerDistrict(scootersInDistrict.get(targetDistrictForFM))
+                + numberOfFEPerDistrict(scootersInDistrict.get(targetDistrictForFM)
                 - maintainedByManagers);
-
     }
 
     private int numberOfFEPerDistrict(int scooters) {
