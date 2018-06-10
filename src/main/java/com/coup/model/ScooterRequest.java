@@ -1,4 +1,4 @@
-package com.coup.fleet_engineers.model;
+package com.coup.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

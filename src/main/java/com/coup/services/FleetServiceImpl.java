@@ -1,6 +1,6 @@
-package com.coup.fleet_engineers.services;
+package com.coup.services;
 
-import com.coup.fleet_engineers.model.ScooterRequest;
+import com.coup.model.ScooterRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

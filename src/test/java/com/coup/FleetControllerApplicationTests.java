@@ -1,8 +1,8 @@
-package com.coup.fleet_engineers;
+package com.coup;
 
-import com.coup.fleet_engineers.controller.FleetController;
-import com.coup.fleet_engineers.model.ScooterRequest;
-import com.coup.fleet_engineers.services.FleetServiceImpl;
+import com.coup.controller.FleetController;
+import com.coup.model.ScooterRequest;
+import com.coup.services.FleetServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +23,10 @@ import static org.mockito.Mockito.when;
 public class FleetControllerApplicationTests {
 
     @InjectMocks
-    FleetController fleetController;
+    private FleetController fleetController;
 
     @Mock
-    FleetServiceImpl fleetServiceImpl;
+    private FleetServiceImpl fleetServiceImpl;
 
     @Before
     public void initMocks() {

@@ -1,7 +1,7 @@
-package com.coup.fleet_engineers.controller;
+package com.coup.controller;
 
-import com.coup.fleet_engineers.model.ScooterRequest;
-import com.coup.fleet_engineers.services.FleetServiceImpl;
+import com.coup.model.ScooterRequest;
+import com.coup.services.FleetServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
