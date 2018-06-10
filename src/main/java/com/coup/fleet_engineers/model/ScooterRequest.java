@@ -1,11 +1,11 @@
-package com.assignment.fleet_engineers.model;
+package com.coup.fleet_engineers.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScooterSpec {
+public class ScooterRequest {
 
     @JsonProperty("P")
     private int maintainedByEngineers;
@@ -42,7 +42,7 @@ public class ScooterSpec {
 
     @Override
     public String toString() {
-        return "ScooterSpec{" +
+        return "ScooterRequest{" +
                 "maintainedByEngineers=" + maintainedByEngineers +
                 ", maintainedByManagers=" + maintainedByManagers +
                 ", scootersInDistrict=" + scootersInDistrict +

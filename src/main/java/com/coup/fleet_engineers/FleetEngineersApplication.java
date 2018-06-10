@@ -1,4 +1,4 @@
-package com.assignment.fleet_engineers;
+package com.coup.fleet_engineers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

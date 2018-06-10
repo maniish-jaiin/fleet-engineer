@@ -1,4 +1,4 @@
-package com.assignment.fleet_engineers.controller;
+package com.coup.fleet_engineers.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
